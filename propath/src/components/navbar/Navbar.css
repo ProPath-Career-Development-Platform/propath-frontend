@@ -1,0 +1,36 @@
+.topnav{
+    background-color: #f1f0f0;
+    color: #6a6969;
+    font-weight: 500;
+}
+
+.topnav ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.topnav a{
+    text-decoration: none;
+    height: 100%;
+    display: flex;
+    padding: 0.75rem;
+}
+
+.topnav li:hover{
+    color: #000;
+}
+
+.topnav li.active{
+    background-color: #fff;
+}
+
+@media (max-width: 1024px) {
+    .topnav {
+      display: none;
+    }
+  }
