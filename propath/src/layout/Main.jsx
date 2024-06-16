@@ -10,6 +10,7 @@ const Main = () => {
         <Navbar2/>
         <Outlet/>
         <footer>footer</footer>
+        
     </div>
   )
 }
