@@ -6,8 +6,14 @@ export default {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        "primary" : ["Poppins", 'sans-serif']
+      colors: {
+        "primary" : "#3f067a",
+        "secondary": "#9a80d4",
+        "grey": "#6a6969",
+        "grey2": "#484848"
+      },
+      fontSize: {
+        "navbar" : "15px"
       }
     },
   },
