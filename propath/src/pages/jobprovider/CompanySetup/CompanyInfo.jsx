@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar1 from '../../navbar/Navbar1'
-import NavigationPanel from './NavigationPanel'
+import Navbar1 from '../../../components/navbar/Navbar1'
+import NavigationPanel from '../../../components/jobprovider/CompanySetup1/NavigationPanel'
 import '../../../index.css'
 import Box from '@mui/material/Box';
 
 
 
-const MainPage = () => {
+const CompanyInfo = () => {
   return (
 
       <div
@@ -31,4 +31,4 @@ const MainPage = () => {
   )
 }
 
-export default MainPage
+export default CompanyInfo
