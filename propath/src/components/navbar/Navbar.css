@@ -30,7 +30,7 @@
     background-color: #fff;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 10px) {
     .topnav {
       display: none;
     }

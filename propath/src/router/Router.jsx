@@ -6,15 +6,14 @@ import Home from "../pages/home/Home";
 import DashboardLayout from "../layout/Dashboard";
 
 //jobprovider
-import MainPage from "../components/jobprovider/CompanySetup1/MainPage";
+import MainPage from "../components/JobProvider/CompanySetup1/MainPage";
 import JpHome from "../pages/jobprovider/dashboard/Home";
 import JpDashboard from "../pages/jobprovider/dashboard/Dashboard";
 import JpPostAJob from "../pages/jobprovider/dashboard/PostaJob";
 import JpMyJobs from "../pages/jobprovider/dashboard/MyJob";
 import JpPlansAndBilling from "../pages/jobprovider/dashboard/PlanAndBilling";
 import JpMeetUp from "../pages/jobprovider/dashboard/MeetUp";
-
-
+import JobSeekerHome from "../pages/jobseeker/JobSeekerHome";
 
 
 const router = createBrowserRouter([
@@ -73,6 +72,18 @@ const router = createBrowserRouter([
         }
       ]
     },
+
+    
+
+      {
+        path: "/jobseeker",
+        element: <JobSeekerHome/>,
+        children: [
+          
+        ]
+      }
+
+    
    
 ]);
 
