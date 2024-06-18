@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/home/Home";
 
@@ -28,7 +28,7 @@ const router = createBrowserRouter([
       ]
     },
     {
-      path: "/Jobprovider",
+      path: "/JobProvider",
       element: <MainPage/>,
       children: [
         {
