@@ -6,7 +6,8 @@ import Home from "../pages/home/Home";
 import DashboardLayout from "../layout/Dashboard";
 
 //jobprovider
-import MainPage from "../components/JobProvider/CompanySetup1/MainPage";
+import JPCompnaySetup1 from "../pages/jobprovider/CompanySetup/CompanyInfo";
+
 import JpHome from "../pages/jobprovider/dashboard/Home";
 import JpDashboard from "../pages/jobprovider/dashboard/Dashboard";
 import JpPostAJob from "../pages/jobprovider/dashboard/PostaJob";
@@ -29,11 +30,11 @@ const router = createBrowserRouter([
     },
     {
       path: "/Jobprovider",
-      element: <MainPage/>,
+      element: <JPCompnaySetup1/>,
       children: [
         {
           path:"Setup",
-          element:<MainPage/>
+          element:<JPCompnaySetup1/>
         }
       ]
     },
