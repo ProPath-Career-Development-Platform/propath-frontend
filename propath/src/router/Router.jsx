@@ -15,6 +15,9 @@ import JpMyJobs from "../pages/jobprovider/dashboard/MyJob";
 import JpPlansAndBilling from "../pages/jobprovider/dashboard/PlanAndBilling";
 import JpMeetUp from "../pages/jobprovider/dashboard/MeetUp";
 import JobSeekerHome from "../pages/jobseeker/JobSeekerHome";
+import Login from "../pages/Auth/Login";
+import ForgotPassword from "../pages/Auth/ForgetPassword"; 
+import Signup from "../pages/Auth/Signup"
 
 
 const router = createBrowserRouter([
@@ -25,7 +28,19 @@ const router = createBrowserRouter([
         {
             path: "/",
             element: <Home/>
-        }
+        },
+        {
+          path: "login",
+          element: <Login/>
+        },
+        {
+          path: "forgotpassword",
+          element: <ForgotPassword />,
+        },
+        {
+          path: "signup",
+          element: <Signup />,
+        },
       ]
     },
     {

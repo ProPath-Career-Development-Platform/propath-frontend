@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from '/logo.png';
 import '../../App.css'
+import { useNavigate } from 'react-router-dom';
 
 const NavbarJobs = () => {
+    const navigate = useNavigate();
+    const handleLogin = () => {
+        navigate('/login');
+    }
   return (
     <div>
         <div className="navbar bg-base-100 md:px-12">
@@ -35,7 +40,7 @@ const NavbarJobs = () => {
                 </div>
             </div>
             <div className="navbar-end gap-6 flex justify-end">
-                <a className="btn bg-primary text-white">Login</a>
+                <a className="btn bg-primary text-white" onClick={handleLogin}>Login</a>
                 <a href="#" className='font-semibold text-primary hidden lg:block'>Employer Site</a>
             </div>
         </div>
