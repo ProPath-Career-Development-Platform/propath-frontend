@@ -13,7 +13,7 @@ import ColorSchemeToggle from './ColorSchemeToggle';
 import { closeSidebar } from '../../utils/sidebarUtils';
 
 import JpMenuItems from '../jobprovider/dashboard/sidebarMenuItems';
-//import jobseeker menu items
+import JsMenuItems from '../JobSeeker/JobSeekerSideBar';
 //import admin menu items
 
 function Toggler({
@@ -41,11 +41,10 @@ function Toggler({
   );
 }
 
-export default function Sidebar() {
+export default function Sidebar({actor}) {
 
-  // get user type from cokie or local storage , for testing purpose i have hardcoded it
-  // (jobprovider, jobseeker, admin)
-  const user = "jobprovider" 
+  
+  const user = actor.user
   
 
 

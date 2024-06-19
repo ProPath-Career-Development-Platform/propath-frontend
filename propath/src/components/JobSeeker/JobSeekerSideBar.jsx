@@ -23,6 +23,9 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import Chip from '@mui/joy/Chip';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkIcon from '@mui/icons-material/Work';
@@ -87,8 +90,8 @@ function JobSeekerSideBar() {
           <ListItem>
             <ListItemButton
             component="a" 
-            href="/jobprovider/home/"
-            selected={location.pathname === "/jobprovider/home/"}>
+            href="/jobseeker/home/"
+            selected={location.pathname === "/jobseeker/home/"}>
               <HomeRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Home</Typography>
@@ -99,12 +102,12 @@ function JobSeekerSideBar() {
           <ListItem>
             <ListItemButton 
               component="a" 
-              href="/jobprovider/dashboard/"
-              selected={location.pathname === "/jobprovider/dashboard/"}
+              href="/jobseeker/applied-jobs/"
+              selected={location.pathname === "/jobseeker/applied-jobs/"}
              >
               <DashboardRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Dashboard</Typography>
+                <Typography level="title-sm">Applied Jobs</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -194,16 +197,16 @@ function JobSeekerSideBar() {
           </ListItem>
         */}
 
-        {/* 
+        
           <ListItem>
             <ListItemButton
               role="menuitem"
               component="a"
               href="/joy-ui/getting-started/templates/messages/"
             >
-              <QuestionAnswerRoundedIcon />
+              <NotificationsActiveIcon />
               <ListItemContent>
-                <Typography level="title-sm">Messages</Typography>
+                <Typography level="title-sm">Notifications</Typography>
               </ListItemContent>
               <Chip size="sm" color="primary" variant="solid">
                 4
@@ -211,7 +214,7 @@ function JobSeekerSideBar() {
             </ListItemButton>
           </ListItem>
 
-          */}
+         
 
           <ListItem nested>
             <Toggler
@@ -258,12 +261,14 @@ function JobSeekerSideBar() {
             mb: 2,
           }}
         >
-          <ListItem>
+        {/**   <ListItem>
             <ListItemButton>
               <SupportRoundedIcon />
               Support
             </ListItemButton>
           </ListItem>
+
+        */}
           <ListItem>
             <ListItemButton>
               <SettingsRoundedIcon />

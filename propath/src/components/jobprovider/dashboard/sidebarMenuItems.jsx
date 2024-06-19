@@ -23,6 +23,8 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import Chip from '@mui/joy/Chip';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkIcon from '@mui/icons-material/Work';
@@ -229,7 +231,7 @@ function sidebarMenuItems() {
           </ListItem>
         */}
 
-        {/* 
+        
           <ListItem>
             <ListItemButton
               role="menuitem"
@@ -238,7 +240,7 @@ function sidebarMenuItems() {
             >
               <QuestionAnswerRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Messages</Typography>
+                <Typography level="title-sm">Notifications</Typography>
               </ListItemContent>
               <Chip size="sm" color="primary" variant="solid">
                 4
@@ -246,7 +248,7 @@ function sidebarMenuItems() {
             </ListItemButton>
           </ListItem>
 
-          */}
+          
 
           <ListItem nested>
             <Toggler
@@ -293,12 +295,15 @@ function sidebarMenuItems() {
             mb: 2,
           }}
         >
-          <ListItem>
+       
+       {/*   <ListItem>
             <ListItemButton>
               <SupportRoundedIcon />
               Support
             </ListItemButton>
           </ListItem>
+
+        */}
           <ListItem>
             <ListItemButton>
               <SettingsRoundedIcon />

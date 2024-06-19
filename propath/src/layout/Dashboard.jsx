@@ -8,13 +8,13 @@ import Box from '@mui/joy/Box';
 import Sidebar from '../components/dashboard/Sidebar';
 import Header from '../components/dashboard/Header';
 
-export default function JoyOrderDashboardTemplate() {
+export default function JoyOrderDashboardTemplate({user}) {
     return (
       <CssVarsProvider disableTransitionOnChange>
         <CssBaseline />
         <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
           <Header />
-          <Sidebar />
+          <Sidebar actor={{user}} />
 
           <Outlet/> {/*Renders the child route's element, if there is one.*/}
           
