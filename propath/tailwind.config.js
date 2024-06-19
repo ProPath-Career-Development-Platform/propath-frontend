@@ -10,7 +10,8 @@ export default {
         "primary" : "#3f067a",
         "secondary": "#9a80d4",
         "grey": "#6a6969",
-        "grey2": "#484848"
+        "grey2": "#484848",
+        "purple3": "#2b2e56"
       },
       fontSize: {
         "navbar" : "15px"
