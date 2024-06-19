@@ -19,6 +19,7 @@ import Login from "../pages/Auth/Login";
 import ForgotPassword from "../pages/Auth/ForgetPassword"; 
 import Signup from "../pages/Auth/Signup";
 import PasswordReset from "../pages/Auth/PasswordReset";
+import EmailVerification from "../pages/Auth/EmailVerification";
 
 const router = createBrowserRouter([
     {
@@ -41,10 +42,14 @@ const router = createBrowserRouter([
           path: "signup",
           element: <Signup />,
         },
-        // {
-        //   path: "resetpassword",
-        //   element: <PasswordReset />,
-        // },
+        {
+          path: "resetpassword",
+          element: <PasswordReset />,
+        },
+        {
+          path: "emailverification",
+          element: <EmailVerification />,
+        },
       ]
     },
     {
