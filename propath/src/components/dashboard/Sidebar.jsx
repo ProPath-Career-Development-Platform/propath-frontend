@@ -12,7 +12,7 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import ColorSchemeToggle from './ColorSchemeToggle';
 import { closeSidebar } from '../../utils/sidebarUtils';
 
-import JpMenuItems from '../JobProvider/dashboard/sidebarMenuItems';
+import JpMenuItems from '../jobprovider/dashboard/sidebarMenuItems';
 //import jobseeker menu items
 //import admin menu items
 
