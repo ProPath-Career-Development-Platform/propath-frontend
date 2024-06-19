@@ -23,7 +23,7 @@ function ForgetPassword() {
               />
             </div>
             <div className="mt-8 flex flex-col gap-y-4">
-              <button className="active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out transform py-3 bg-[#9a80d4] rounded-xl text-white font-bold text-lg hover:bg-[#6756a8]">
+              <button className="active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] ease-in-out transform py-2 bg-[#9a80d4] rounded-xl text-white font-bold text-lg hover:bg-[#6756a8]">
                 Reset Password
               </button>
               <button
@@ -61,15 +61,14 @@ function ForgetPassword() {
               <p className="font-medium text-base">Go back to</p>
               <button
                 onClick={handlesignin}
-                className=" font-medium text-base text-[#9a80d4] hover:text-[#6756a8] h-12 px-4 rounded-xl  bg-transparent"
+                className="font-medium text-base text-[#9a80d4] hover:text-[#6756a8] h-12 px-4 rounded-xl bg-transparent"
               >
                 Sign in
               </button>
-              <br />
-              <p className="font-medium text-base">Don't have an account?</p>
-              <button className="ml-2 font-medium text-base text-[#9a80d4] hover:text-[#6756a8] h-12 px-4 rounded-xl  bg-transparent">
+              {/* <p className="font-medium text-base">Don't have an account?</p>
+              <button className="font-medium text-base text-[#9a80d4] hover:text-[#6756a8] h-12 px-4 rounded-xl bg-transparent">
                 Sign up
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
