@@ -15,6 +15,7 @@ import { NumericFormat } from 'react-number-format';
 import PropTypes from 'prop-types';
 import Snackbar from '@mui/joy/Snackbar';
 import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
+import Switch from '@mui/joy/Switch';
 
 
 import Card from '@mui/joy/Card';
@@ -36,6 +37,10 @@ import {Chip}  from '@mui/joy';
 import WorkOutlineOutlinedIcon from '@mui/icons-material/WorkOutlineOutlined';
 import Textarea from '@mui/joy/Textarea';
 import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
+
+import { SurveyCreatorComponent, SurveyCreator } from "survey-creator-react";
+import "survey-core/defaultV2.css";
+import "survey-creator-core/survey-creator-core.css";
 
 const formatDate = (date) => {
   const year = date.getFullYear();
@@ -90,10 +95,63 @@ const Dashboard = () => {
     expirationDate: '',
     jobLevel: '',
     description: '',
+    customizedForm: '',
+    isCustomizedFormNeeded: false,
   });
 
   const [errors, setErrors] = useState({});
   const [open, setOpen] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
+  let [creator, setCreator] = useState();
+  const [surveyOpen, setsurveyOpen] = React.useState(false);  // error1
+  const [errorsurveyOpen, setErrorSurveyOpen] = React.useState(false); // error2
+
+
+  //suevey creator start===========================
+
+
+
+
+  if (creator === undefined) {
+    let options = { showLogicTab: false, showTranslationTab: false,showJSONEditorTab: false, showEmbededSurveyTab: false, isAutoSave: true};
+    creator = new SurveyCreator(options);
+   // creator.toolbox.removeItem('file');
+
+    creator.saveSurveyFunc = (saveNo, callback) => {
+     // console.log(JSON.stringify(creator.JSON));
+      callback(saveNo, true);
+
+       // If you use a web service:
+      saveSurveyJson(
+        creator.JSON,
+       saveNo,
+        callback
+       );
+
+
+    };
+     
+    setCreator(creator);
+  }
+
+  //creator.JSON = props.json;
+
+  function saveSurveyJson( json, saveNo, callback) {
+    const jsonDataString = JSON.stringify(json); // Convert JSON object to string
+    const dataToSend = {
+      jsonData: jsonDataString // Wrap JSON string within quotes
+    };
+
+    // Update formData using functional state update to ensure correctness
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      customizedForm: jsonDataString,
+    }));
+
+    callback(saveNo, true);
+  }
+
+  //survey js over===========================
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -212,13 +270,19 @@ const Dashboard = () => {
       newErrors.description = 'Description is required';
     }
 
-
-
-
-
+    //customizedForm
+    if (checked && !formData.customizedForm) {
+      newErrors.customizedForm = 'Customized form is required';
+      if(Object.keys(newErrors).length <=1) setErrorSurveyOpen(true);
+    }
     // Add more validation rules as needed
     return newErrors;
   };
+
+
+  
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -238,7 +302,22 @@ const Dashboard = () => {
       if (Object.keys(validationErrors).length > 0) {
         setErrors(validationErrors);
       } else {
+        
+         
+
+
         alert(JSON.stringify(formData));
+
+        //fetch to post data to the sever localhost only custom form 
+
+        
+
+       
+
+        
+        
+
+        
         // Perform further actions like API submission
         //fetch to post data to the server here
       }
@@ -334,6 +413,9 @@ const Dashboard = () => {
                 </Typography>
                 <Divider inset="none" />
                 <CardContent>
+
+                <Typography level="title-lg" sx={{marginBottom: '1rem',}} >Job Informations</Typography>
+
                   <FormControl sx={{ gridColumn: '1/-1', marginBottom:1 }} error={Boolean(errors.jobTitle)}>
                     <FormLabel>Job Title</FormLabel>
                     <Input name="jobTitle"   placeholder='Add job tittle, role, vacancies etc' onChange={handleInputChange} />
@@ -709,6 +791,55 @@ const Dashboard = () => {
 
                   </Box>
 
+                  {/* Swithch here for Survey */}
+
+                  <FormControl error={Boolean(errors.customizedForm)}>
+
+                  <Typography sx={{marginBottom:'1rem'}} level="title-lg" endDecorator={
+                    
+                        <Switch
+                        sx={{ ml: 1 }}
+                        checked={checked}
+                        onChange={ (event) => {
+                          const isChecked = event.target.checked;
+                          setChecked(isChecked);
+                          console.log(isChecked);
+
+
+                          setFormData({ ...formData, isCustomizedFormNeeded: isChecked });
+
+                          
+                            
+
+                          if(!isChecked){
+                            setsurveyOpen(true);
+
+                            setErrors((prevState) => {
+                              const newErrors = { ...prevState };
+                              delete newErrors.customizedForm;
+                              return newErrors;
+                            });
+                          }
+
+                        }
+                      }
+                        />
+                        }
+                  >
+                    Need a Customized Form?
+                  </Typography>
+
+                  <Box borderRadius={10}   sx={{ display: checked ? 'block' : 'none' , mt:1,mb:1  , border: !Boolean(errors.customizedForm) ? '1px solid #CDD7E1' : '1px solid red' , padding:1 }}>
+
+                    <SurveyCreatorComponent  creator={creator} />
+                  
+                  </Box>
+
+                  
+
+                  </FormControl>
+                  
+
 
                   <Typography level="title-lg" sx={{marginBottom: '1rem',}} >Job Description</Typography>
 
@@ -760,10 +891,69 @@ const Dashboard = () => {
                         Dismiss
                       </Button>
                     }
+                  > 
+                   <Box sx={{display: 'flex' , flexDirection:'column'}}>
+
+                      <Typography level='title-md' textAlign={'left'}>Please consider upgrading your plan.</Typography>
+                      <Typography level='body-sm'>You have exceeded the posting limit for your current plan.</Typography>
+                    </Box>
+                    
+                  </Snackbar>
+
+                  <Snackbar
+                    variant="soft"
+                    color="danger"
+                    open={surveyOpen}
+                    onClose={() => setsurveyOpen(false)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    startDecorator={<WarningAmberIcon />}
+                    endDecorator={
+                      <Button
+                        onClick={() => setsurveyOpen(false)}
+                        size="sm"
+                        variant="soft"
+                        color="danger"
+                      >
+                        Dismiss
+                      </Button>
+                    }
                   >
-                    You've reached the post limit for your current plan.
+                    <Box sx={{display: 'flex' , flexDirection:'column'}}>
+
+                      <Typography level='title-md' textAlign={'left'}>The customized form has been disabled.</Typography>
+                      <Typography level='body-sm'>This form will not be included with the job posting.</Typography>
+                    </Box>
+                    
+                  </Snackbar>
+
+
+                  <Snackbar
+                    variant="soft"
+                    color="danger"
+                    open={errorsurveyOpen}
+                    onClose={() => setErrorSurveyOpen(false)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    startDecorator={<WarningAmberIcon />}
+                    endDecorator={
+                      <Button
+                        onClick={() => setErrorSurveyOpen(false)}
+                        size="sm"
+                        variant="soft"
+                        color="danger"
+                      >
+                        Dismiss
+                      </Button>
+                    }
+                  > 
+                    <Box sx={{display: 'flex' , flexDirection:'column'}}>
+
+                    <Typography level='title-md' textAlign={'left'}>Please create the form.</Typography>
+                    <Typography level='body-sm'>Drag and drop items from the toolbox on the left side.</Typography>
+                    </Box>
                   </Snackbar>
                 </React.Fragment>
+
+                
           </Box>
 
   )
