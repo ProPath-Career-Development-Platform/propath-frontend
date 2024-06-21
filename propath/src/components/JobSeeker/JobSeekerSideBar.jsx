@@ -1,4 +1,4 @@
-import React,{useState} from 'react' 
+import React,{useState} from 'react'
 import { useLocation } from 'react-router-dom'
 
 import Box from '@mui/joy/Box';
@@ -23,6 +23,7 @@ import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
 import Chip from '@mui/joy/Chip';
 
@@ -32,9 +33,8 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import GroupsIcon from '@mui/icons-material/Groups';
 
 import Typography from '@mui/joy/Typography';
-import { useEffect } from 'react';
 
-
+console.log('Current pathname:', location.pathname);
 
 function Toggler({
     defaultExpanded = false,
@@ -60,42 +60,8 @@ function Toggler({
       </>
     );
   }
- 
-function sidebarMenuItems() {
 
-  const [stackState, setStackState] = useState(false);
-
-  useEffect(() => {
-    const savedState = sessionStorage.getItem('planCardState');
-    if (savedState === null) {
-      setStackState(true);
-    } else {
-      const parsedState = JSON.parse(savedState);
-      if (parsedState === false) {
-        setStackState(false);
-      } else if (parsedState === true) {
-        setStackState(true);
-      }
-    }
-  }, []);
-  
-
-   // Save state to session storage when it changes
-   useEffect(() => {
-    sessionStorage.setItem('planCardState', JSON.stringify(stackState));
-  }, [stackState]);
-
-  function handleStack() {
-    console.log('Stack clicked');
-    if (stackState){
-      setStackState(false);
-    }else{
-      setStackState(true);
-    }
-    
-  }
-
-  
+function JobSeekerSideBar() {
   return (
     <>
 
@@ -124,8 +90,8 @@ function sidebarMenuItems() {
           <ListItem>
             <ListItemButton
             component="a" 
-            href="/jobprovider/home/"
-            selected={location.pathname === "/jobprovider/home/"}>
+            href="/jobseeker/home/"
+            selected={location.pathname === "/jobseeker/home/"}>
               <HomeRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Home</Typography>
@@ -136,12 +102,12 @@ function sidebarMenuItems() {
           <ListItem>
             <ListItemButton 
               component="a" 
-              href="/jobprovider/dashboard/"
-              selected={location.pathname === "/jobprovider/dashboard/"}
+              href="/jobseeker/applied-jobs/"
+              selected={location.pathname === "/jobseeker/applied-jobs/"}
              >
               <DashboardRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Dashboard</Typography>
+                <Typography level="title-sm">Applied Jobs</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -238,7 +204,7 @@ function sidebarMenuItems() {
               component="a"
               href="/joy-ui/getting-started/templates/messages/"
             >
-              <QuestionAnswerRoundedIcon />
+              <NotificationsActiveIcon />
               <ListItemContent>
                 <Typography level="title-sm">Notifications</Typography>
               </ListItemContent>
@@ -248,7 +214,7 @@ function sidebarMenuItems() {
             </ListItemButton>
           </ListItem>
 
-          
+         
 
           <ListItem nested>
             <Toggler
@@ -295,8 +261,7 @@ function sidebarMenuItems() {
             mb: 2,
           }}
         >
-       
-       {/*   <ListItem>
+        {/**   <ListItem>
             <ListItemButton>
               <SupportRoundedIcon />
               Support
@@ -311,40 +276,27 @@ function sidebarMenuItems() {
             </ListItemButton>
           </ListItem>
         </List>
-
-
-        {/* card logic here */}
-        { stackState && 
-        
-        <>
-
         <Card
           invertedColors
           variant="soft"
           color="warning"
           size="sm"
           sx={{ boxShadow: 'none' }}
-          
         >
-          <Stack direction="row" justifyContent="space-between" alignItems="center" >
-            <Typography level="title-sm">Using Free Plan</Typography>
-            <IconButton size="sm" onClick={handleStack}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Typography level="title-sm">Used space</Typography>
+            <IconButton size="sm">
               <CloseRoundedIcon />
             </IconButton>
           </Stack>
           <Typography level="body-xs">
-            Need more job posts?<br></br>Upgrade now for additional job postings!
+            Your team has used 80% of your available space. Need more?
           </Typography>
-          
-          
+          <LinearProgress variant="outlined" value={80}          />
           <Button size="sm" variant="solid">
             Upgrade plan
           </Button>
         </Card>
-
-        </>}
-
-
       </Box>
       <Divider />
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
@@ -368,4 +320,4 @@ function sidebarMenuItems() {
   )
 }
 
-export default sidebarMenuItems
+export default JobSeekerSideBar

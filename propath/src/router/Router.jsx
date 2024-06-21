@@ -7,6 +7,7 @@ import DashboardLayout from "../layout/Dashboard";
 
 //jobprovider
 import JPCompnaySetup1 from "../pages/jobprovider/CompanySetup/CompanyInfo";
+
 import JpHome from "../pages/jobprovider/dashboard/Home";
 import JpDashboard from "../pages/jobprovider/dashboard/Dashboard";
 import JpPostAJob from "../pages/jobprovider/dashboard/PostaJob";
@@ -14,7 +15,9 @@ import JpMyJobs from "../pages/jobprovider/dashboard/MyJob";
 import JpPlansAndBilling from "../pages/jobprovider/dashboard/PlanAndBilling";
 import JpMeetUp from "../pages/jobprovider/dashboard/MeetUp";
 
-
+//jobseeker
+import JobSeekerHome from "../pages/jobseeker/JobSeekerHome";
+import JsAppliedJobs from "../pages/jobseeker/AppliedJobs";
 
 
 const router = createBrowserRouter([
@@ -40,7 +43,7 @@ const router = createBrowserRouter([
     },
     {
       path: "/jobprovider",
-      element: <DashboardLayout/>,
+      element: <DashboardLayout user="jobprovider"/>,
       children: [
         {
           path:"/jobprovider",
@@ -73,6 +76,33 @@ const router = createBrowserRouter([
         }
       ]
     },
+
+    
+
+      {
+        path: "/jobseeker",
+        element: <DashboardLayout user="jobseeker"/>,
+        children: [
+
+          {
+            path:"/jobseeker",
+            element: <Navigate to="/jobseeker/home/" replace />
+          },
+
+          {
+            path:"home",
+            element:<JobSeekerHome/>
+          },
+
+          {
+            path:"applied-jobs",
+            element:<JsAppliedJobs/>
+          },
+          
+        ]
+      }
+
+    
    
 ]);
 
