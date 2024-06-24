@@ -14,6 +14,7 @@ import JpPostAJob from "../pages/jobprovider/dashboard/PostaJob";
 import JpMyJobs from "../pages/jobprovider/dashboard/MyJob";
 import JpPlansAndBilling from "../pages/jobprovider/dashboard/PlanAndBilling";
 import JpMeetUp from "../pages/jobprovider/dashboard/MeetUp";
+import JpSettings from "../pages/jobprovider/dashboard/Settings"
 
 //jobseeker
 import JobSeekerHome from "../pages/jobseeker/JobSeekerHome";
@@ -73,7 +74,12 @@ const router = createBrowserRouter([
         {
           path:"meet-up",
           element:<JpMeetUp/>
+        },
+        {
+          path:"settings",
+          element:<JpSettings/>
         }
+
       ]
     },
 

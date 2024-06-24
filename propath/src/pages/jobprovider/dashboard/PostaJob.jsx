@@ -6,28 +6,20 @@ import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
-import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
-import ArrowForward from '@mui/icons-material/ArrowForward';
 import Box from '@mui/joy/Box';
-import { Container } from '@mui/material';
-import { typographyClasses } from '@mui/joy/Typography';
 import { NumericFormat } from 'react-number-format';
-import PropTypes from 'prop-types';
 import Snackbar from '@mui/joy/Snackbar';
-import PlaylistAddCheckCircleRoundedIcon from '@mui/icons-material/PlaylistAddCheckCircleRounded';
 import Switch from '@mui/joy/Switch';
 
 
 import Card from '@mui/joy/Card';
 import CardActions from '@mui/joy/CardActions';
 import CardContent from '@mui/joy/CardContent';
-import Checkbox from '@mui/joy/Checkbox';
 import Divider from '@mui/joy/Divider';
 import FormControl from '@mui/joy/FormControl';
 import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
 import FormHelperText from '@mui/joy/FormHelperText';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 
@@ -397,6 +389,8 @@ const Dashboard = () => {
               </Typography>
               
             </Box>
+
+            <Divider />
 
           <form onSubmit={handleSubmit}>
             <Card
