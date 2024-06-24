@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef} from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import {Button, Typography } from '@mui/material';
+import {Typography} from '@mui/material';
 import 'boxicons';
 
 import TextField from '@mui/material/TextField';
 import '../../../index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faLandmark,faSquarePhone,faEarthAmericas, faLaptop,faCircleArrowRight,faImage,faLink,faCircleArrowLeft,faTimes} from '@fortawesome/free-solid-svg-icons'
+import {faLandmark,faSquarePhone,faEarthAmericas, faLaptop,faCircleArrowRight,faImage,faLink,faCircleArrowLeft,faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/joy/FormControl';
@@ -18,7 +18,10 @@ import FormLabel from '@mui/joy/FormLabel';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import Input from '@mui/joy/Input';
-import Stack from '@mui/joy/Stack';
+import LocationOn from '@mui/icons-material/LocationOn';
+import Button from '@mui/joy/Button';
+import Avatar from '@mui/joy/Avatar';
+import MailIcon from '@mui/icons-material/Mail';
 
 
 import Textarea from '@mui/joy/Textarea';
@@ -33,7 +36,6 @@ import FormatListBulleted from '@mui/icons-material/FormatListBulleted';
 import Link from '@mui/icons-material/Link';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 import Check from '@mui/icons-material/Check';
-
 
 
 
@@ -94,56 +96,45 @@ const [italic, setItalic] = React.useState(false);
   const [link, setLink] = React.useState(false);
 
  
-  const [selectedSocial, setSelectedSocial] = useState('facebook');
-  const [url, setUrl] = useState('');
-
-  const handleSocialChange = (event) => {
-    console.log(event);
-    if (event && event.target) { // Check if event.target exists before accessing it
-      const { value } = event.target;
-      setSelectedSocial(value);
-    }
-  };
   
 
-  const handleUrlChange = (event) => {
-    if (event && event.target) {
-      setUrl(event.target.value);
-    }
+
+  const [links, setLinks] = useState([
+    { platform: 'Facebook', url: '' },
+    { platform: 'Instagram', url: '' },
+    { platform: 'Linkedin', url: '' },
+  ]);
+
+  const handleSocialChange = (index, event) => {
+    const newLinks = [...links];
+    newLinks[index].platform = event.target.value;
+    setLinks(newLinks);
   };
 
-  const handleCancel = () => {
-    setSelectedSocial('facebook');
-    setUrl('');
+  const handleUrlChange = (index, event) => {
+    const newLinks = [...links];
+    newLinks[index].url = event.target.value;
+    setLinks(newLinks);
   };
 
-  // const renderValue = (value) => {
-  //   switch (value) {
-  //     case 'Facebook':
-  //       return (
-  //         <Box display="flex" alignItems="center">
-  //           <box-icon name='facebook-circle' type='logo' color='#1877f2'></box-icon>
-  //           <span> Facebook</span>
-  //         </Box>
-  //       );
-  //     case 'Instagram':
-  //       return (
-  //         <Box display="flex" alignItems="center">
-  //           <box-icon name='instagram' type='logo' color='#E1306C'></box-icon>
-  //           <span> Instagram</span>
-  //         </Box>
-  //       );
-  //     case 'YouTube':
-  //       return (
-  //         <Box display="flex" alignItems="center">
-  //           <box-icon name='youtube' type='logo' color='#FF0000'></box-icon>
-  //           <span> YouTube</span>
-  //         </Box>
-  //       );
-  //     default:
-  //       return value;
-  //   }
-  // };
+  const handleAddLink = () => {
+    setLinks([...links, { platform: 'Facebook', url: '' }]);
+  };
+
+  const handleCancel = (index) => {
+    const newLinks = [...links];
+    newLinks.splice(index, 1);
+    setLinks(newLinks);
+  };
+
+
+  
+
+
+ 
+
+  
+ 
   
     
   
@@ -594,12 +585,12 @@ const [italic, setItalic] = React.useState(false);
         
           display: 'block',
           width: '200px',
-          padding: '16px 0',
+          padding: '10px 0',
           borderRadius: '15px',
           backgroundColor: '#0071FF',
           color: '#fff',
           fontWeight: 500,
-          fontSize: '13px',
+          fontSize: '15px',
           cursor: 'pointer',
           transition: 'all .3s ease',
           '&:hover': {
@@ -894,22 +885,23 @@ const [italic, setItalic] = React.useState(false);
             >
               <Box>
               <Button
-        variant="contained"
+        variant="solid"
         sx={{
         
           display: 'block',
           width: '200px',
           padding: '10px 0',
           borderRadius: '15px',
-          backgroundColor: '#fff',
+          backgroundColor: '#FFFFFF',
           color:'#0071FF',
+          border:'1px solid #A9A9A9',
           // color: '#fff',
           fontWeight: 500,
-          fontSize: '13px',
+          fontSize: '15px',
           cursor: 'pointer',
           transition: 'all .3s ease',
           '&:hover': {
-            backgroundColor: '#fff',
+            backgroundColor: '#f0f0f0',
           },
         }}
         
@@ -919,7 +911,7 @@ const [italic, setItalic] = React.useState(false);
               </Box>
               <Box>
               <Button
-        variant="contained"
+        variant="solid"
         sx={{
         
           display: 'block',
@@ -929,7 +921,7 @@ const [italic, setItalic] = React.useState(false);
           backgroundColor: '#0071FF',
           color: '#fff',
           fontWeight: 500,
-          fontSize: '13px',
+          fontSize: '15px',
           cursor: 'pointer',
           transition: 'all .3s ease',
           '&:hover': {
@@ -950,57 +942,384 @@ const [italic, setItalic] = React.useState(false);
 
           
         <TabPanel value="3">
-          <Box>
-            <Box>
-              
-            </Box>
-            <Box>
+          <Box
+          sx={{
+            display:'grid',
+            gridTemplateColumns:'40% 60%',
+            gap:'3',
+            border:2,
+            borderRadius:3,
+            boxShadow:3,
+            pb:6,
+            overflow: 'auto',
+            maxHeight: 'calc(100vh-10px)',
+          }}
+          >
             <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        border: '1px solid #ccc',
-        borderRadius: '4px',
-        padding: '5px',
-        width: '100%',
-        maxWidth: '500px',
-      }}
-    >
-      <Select
-        defaultValue='Facebook'
-        
-        onChange={handleSocialChange}
-        sx={{ marginRight: '5px', width:'150px' }}
-        >
-        <Option value="Facebook"><box-icon name='facebook-circle' type='logo' color='#1877f2' ></box-icon> Facebook</Option>
-        <Option value="Instagram"><box-icon name='instagram' type='logo' color='#E1306C'></box-icon> Instagram</Option>
-        <Option value="YouTube"><box-icon name='youtube' type='logo' color='#FF0000'></box-icon>YouTube</Option>
-        {/* Add more options as needed */}
-      </Select>
-      
-    
-      <TextField
-        type="text"
-        placeholder="Profile link/url..."
-        value={url}
-        onChange={handleUrlChange}
-        variant="outlined"
-        sx={{ flexGrow: 1, marginRight: '5px' }}
-        InputProps={{
-          sx: { paddingRight: '10px',borderRadius:'10px' },
-        }}
-      />
-      <IconButton onClick={handleCancel}>
-        <FontAwesomeIcon icon={faTimes} />
-      </IconButton>
-    </Box>
+            sx={{
+              pl:2,
+              pr:2,
+              pt:2,
+              display:'flex',
+              flexDirection:'column'
+             }}
+            >
+               <Box
+             sx={{
+               display:'flex',
+               alignItems:'center',
+               flexDirection:'column',
+             }}
+            >
+              <div>
+              <img src="../../public/logo.png" alt="" style={{height:'40px'}}/>
+              </div>
+              <div>
+              <p>Where Talents meets Opportunity</p>
+              </div>
             </Box>
+            <Box
+              sx={{
+                display:'flex',
+                mt:2,
+                flexGrow: 1,
+                
+                }}
+            >
+            <img src="../../public/Social_media.jpg" alt="" style={{ borderRadius: '20px',height:'100%',objectFit: 'cover'}} />
+            </Box> 
+            </Box>
+           
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: '40px', pt: 12, alignItems: 'center' }}>
+          {links.map((link, index) => (
+            <Box
+            key={index} sx={{ width: '100%',paddingLeft:10 }}
+            >
+               <p>Social Link {index + 1}</p>
+          <Box
+          key={index}
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            padding: '5px',
+            width: '90%',
+          }}
+          >
+            
+          <Select
+            value={link.platform}
+            onChange={(event) => handleSocialChange(index, event)}
+            style={{ 
+              marginRight: '5px', 
+              width: '150px', 
+              padding: '5px', 
+              borderRadius: '4px', 
+              backgroundColor: 'white', // Set background color
+              // color: 'black', // Set text color
+              border: '1px solid #ccc' // Set border color
+            }}
+          >
+            <Option value="Facebook"><box-icon name='facebook-circle' type='logo' color='#1877f2'></box-icon> Facebook</Option>
+            <Option value="Instagram"><box-icon name='instagram' type='logo' color='#E1306C'></box-icon> Instagram</Option>
+            <Option value="YouTube"><box-icon name='youtube' type='logo' color='#FF0000'></box-icon> YouTube</Option>
+            <Option value="Linkedin"><box-icon name='linkedin-square' type='logo' color='#0077B5'></box-icon> Linkedin</Option>
+          </Select>
+
+        
+          <TextField
+            type="text"
+            placeholder="Profile link/url..."
+            value={link.url}
+            onChange={(event) => handleUrlChange(index, event)}
+            variant="outlined"
+            sx={{ flexGrow: 1, marginRight: '5px' }}
+            InputProps={{
+              sx: { paddingRight: '10px', borderRadius: '10px' },
+            }}
+          />
+          <IconButton onClick={() => handleCancel(index)}>
+            <FontAwesomeIcon icon={faCircleXmark} size="xl" style={{ color: "#ff4747" }} />
+          </IconButton>
+        </Box>
+         </Box>
+      ))}
+      <Button variant="solid" onClick={handleAddLink}>Add Another Link</Button>
+        
+      <Box
+              sx={{
+                display:'flex',
+                flexDirection:'row',
+                gap:'10px',
+                justifyItems:'flex-start'
+              }}
+            >
+              <Box>
+              <Button
+        variant="contained"
+        sx={{
+        
+          display: 'block',
+          width: '200px',
+          padding: '10px 0',
+          borderRadius: '15px',
+          backgroundColor: '#FFFFFF',
+          color:'#0071FF',
+          border:'1px solid #A9A9A9',
+          // color: '#fff',
+          fontWeight: 500,
+          fontSize: '15px',
+          cursor: 'pointer',
+          transition: 'all .3s ease',
+          '&:hover': {
+            backgroundColor: '#f0f0f0',
+          },
+        }}
+        
+      >
+       <FontAwesomeIcon icon={faCircleArrowLeft} size="lg" /> Previous  
+      </Button>
+              </Box>
+              <Box>
+              <Button
+        variant="contained"
+        sx={{
+        
+          display: 'block',
+          width: '200px',
+          padding: '10px 0',
+          borderRadius: '15px',
+          backgroundColor: '#0071FF',
+          color: '#fff',
+          fontWeight: 500,
+          fontSize: '15px',
+          cursor: 'pointer',
+          transition: 'all .3s ease',
+          '&:hover': {
+            backgroundColor: '#005DD1',
+          },
+        }}
+        
+      >
+       Save and Next   <FontAwesomeIcon icon={faCircleArrowRight} size="lg" />
+      </Button>
+              </Box>
+           
+            </Box>
+
+          </Box>
           </Box>
           
         </TabPanel>
 
 
-      <TabPanel value="4">Item Three</TabPanel>
+      <TabPanel value="4">
+      <Box
+          sx={{
+            display:'grid',
+            gridTemplateColumns:'40% 60%',
+            gap:'3',
+            border:2,
+            borderRadius:3,
+            boxShadow:3,
+            pb:7,
+            overflow: 'auto',
+            maxHeight: 'calc(100vh-10px)',
+           
+          }}
+          >
+            <Box
+            sx={{
+              pl:2,
+              pr:2,
+              pt:2,
+              display:'flex',
+              flexDirection:'column'
+             }}
+            >
+               <Box
+             sx={{
+               display:'flex',
+               alignItems:'center',
+               flexDirection:'column',
+             }}
+            >
+              <div>
+              <img src="../../public/logo.png" alt="" style={{height:'40px'}}/>
+              </div>
+              <div>
+              <p>Where Talents meets Opportunity</p>
+              </div>
+            </Box>
+            <Box
+              sx={{
+                display:'flex',
+                mt:2,
+                flexGrow: 1,
+                
+                }}
+            >
+            <img src="../../public/contactus.jpg" alt="" style={{ borderRadius: '20px',height:'100%',objectFit: 'cover'}} />
+            </Box> 
+            
+            </Box>
+            
+            <Box
+            sx={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              gap: '40px', 
+              pt: 12, 
+              pb:6,
+              alignItems: 'center',}}
+            >
+              <Box
+              sx={{
+                width:'80%',
+              }}              
+              >
+              <FormLabel
+               style={{
+                marginBottom:5
+              }}
+              >
+              Location
+              </FormLabel>
+              <Input
+              placeholder="Company Location"
+              startDecorator={
+              <Button variant="soft" color="neutral" startDecorator={<LocationOn />}>
+              Locate
+              </Button>
+                }
+              sx={{ width:'100%' }}
+              />
+              </Box>
+              
+              <Box
+               sx={{
+                width:'80%',
+              }} 
+              >
+              <FormLabel
+                style={{
+                  marginBottom:5
+                }}
+              >
+              Contact Number
+              </FormLabel>
+              <Input
+              placeholder="Company Contact Number"
+              startDecorator={
+              <Button variant="soft" color="neutral"
+                startDecorator={
+                <Avatar 
+                src="../../public/sri-lanka.png" 
+                size="lg"
+                sx={{ width: 24, height: 24 }} 
+              />}>
+              +94
+              </Button>
+                }
+              sx={{ width:'100%'}}
+              />
+              </Box>
+              
+              <Box
+              sx={{
+                width:'80%',
+              }}
+              >
+              <FormLabel
+               style={{
+                marginBottom:5
+              }}
+              >
+                Email
+              </FormLabel>
+              <Input
+              placeholder="Company Email"
+              startDecorator={
+              <Button variant="soft" color="neutral"
+                startDecorator={<MailIcon />}>
+              
+              </Button>
+                }
+              sx={{ width:'100%' }}
+              />
+              </Box>
+              <Box
+                sx={{
+                  pt:3
+                }}
+              >
+              <Box
+              sx={{
+                display:'flex',
+                flexDirection:'row',
+                gap:'10px',
+                justifyItems:'flex-start'
+              }}
+            >
+              <Box>
+              <Button
+        variant="contained"
+        sx={{
+        
+          display: 'block',
+          width: '200px',
+          padding: '10px 0',
+          borderRadius: '15px',
+          backgroundColor: '#fff',
+          color:'#0071FF',
+          border:'1px solid #A9A9A9',
+          // color: '#fff',
+          fontWeight: 500,
+          fontSize: '15px',
+          cursor: 'pointer',
+          transition: 'all .3s ease',
+          '&:hover': {
+            backgroundColor: '#f0f0f0',
+          },
+        }}
+        
+      >
+       <FontAwesomeIcon icon={faCircleArrowLeft} size="lg" /> Previous  
+      </Button>
+              </Box>
+              <Box>
+              <Button
+        variant="contained"
+        sx={{
+        
+          display: 'block',
+          width: '200px',
+          padding: '10px 0',
+          borderRadius: '15px',
+          backgroundColor: '#0071FF',
+          color: '#fff',
+          fontWeight: 500,
+          fontSize: '15px',
+          cursor: 'pointer',
+          transition: 'all .3s ease',
+          '&:hover': {
+            backgroundColor: '#005DD1',
+          },
+        }}
+        
+      >
+       Save and Next   <FontAwesomeIcon icon={faCircleArrowRight} size="lg" />
+      </Button>
+              </Box>
+           
+            </Box>
+              </Box>
+            </Box>
+            
+            </Box>
+        
+        </TabPanel>
       </TabContext>
     </Box>
   );
