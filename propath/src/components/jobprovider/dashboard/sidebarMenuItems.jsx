@@ -18,7 +18,6 @@ import Avatar from '@mui/joy/Avatar';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
-import SupportRoundedIcon from '@mui/icons-material/SupportRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
@@ -33,6 +32,7 @@ import GroupsIcon from '@mui/icons-material/Groups';
 
 import Typography from '@mui/joy/Typography';
 import { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
 
 
@@ -62,7 +62,7 @@ function Toggler({
   }
  
 function sidebarMenuItems() {
-
+  const location = useLocation();
   const [stackState, setStackState] = useState(false);
 
   useEffect(() => {
@@ -113,90 +113,91 @@ function sidebarMenuItems() {
       >
 
       {/* ================ List here ========== */}
-        <List
-          size="sm"
-          sx={{
-            gap: 1,
-            '--List-nestedInsetStart': '30px',
-            '--ListItem-radius': (theme) => theme.vars.radius.sm,
-          }}
-        >
-          <ListItem>
-            <ListItemButton
-            component="a" 
-            href="/jobprovider/home/"
-            selected={location.pathname === "/jobprovider/home/"}>
-              <HomeRoundedIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Home</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+      <List
+        size="sm"
+        sx={{
+          gap: 1,
+          '--List-nestedInsetStart': '30px',
+          '--ListItem-radius': (theme) => theme.vars.radius.sm,
+        }}
+      >
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/home/"
+            selected={location.pathname === "/jobprovider/home/"}
+          >
+            <HomeRoundedIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Home</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton 
-              component="a" 
-              href="/jobprovider/dashboard/"
-              selected={location.pathname === "/jobprovider/dashboard/"}
-             >
-              <DashboardRoundedIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Dashboard</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/dashboard/"
+            selected={location.pathname === "/jobprovider/dashboard/"}
+          >
+            <DashboardRoundedIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Dashboard</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton
-            component="a" 
-            href="/jobprovider/post-a-job/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/post-a-job/"
             selected={location.pathname === "/jobprovider/post-a-job/"}
-             >
-              <AddCircleOutlineIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Post a Job</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <AddCircleOutlineIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Post a Job</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton
-            component="a"
-            href="/jobprovider/my-jobs/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/my-jobs/"
             selected={location.pathname === "/jobprovider/my-jobs/"}
-             >
-              <WorkIcon />
-              <ListItemContent>
-                <Typography level="title-sm">My Jobs</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <WorkIcon />
+            <ListItemContent>
+              <Typography level="title-sm">My Jobs</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton 
-            component="a"
-            href="/jobprovider/plans-and-billing/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/plans-and-billing/"
             selected={location.pathname === "/jobprovider/plans-and-billing/"}
-            >
-              <PaymentIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Plans and Billing</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <PaymentIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Plans and Billing</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton
-            component="a"
-            href="/jobprovider/meet-up/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/meet-up/"
             selected={location.pathname === "/jobprovider/meet-up/"}
-            >
-              <GroupsIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Meet Up</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <GroupsIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Meet Up</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
           
 
         {/*   <ListItem nested>
@@ -235,7 +236,7 @@ function sidebarMenuItems() {
           <ListItem>
             <ListItemButton
               role="menuitem"
-              component="a"
+              component={RouterLink}
               href="/joy-ui/getting-started/templates/messages/"
             >
               <QuestionAnswerRoundedIcon />
@@ -283,6 +284,21 @@ function sidebarMenuItems() {
               </List>
             </Toggler>
           </ListItem>
+
+          <ListItem>
+            <ListItemButton
+
+            component={RouterLink}
+            to="/jobprovider/settings/"
+            selected={location.pathname === "/jobprovider/settings/"}
+            
+            >
+              <SettingsRoundedIcon />
+              <Typography level="title-sm">Settings</Typography>
+            </ListItemButton>
+          </ListItem>
+
+
         </List>
 
         <List
@@ -304,12 +320,7 @@ function sidebarMenuItems() {
           </ListItem>
 
         */}
-          <ListItem>
-            <ListItemButton>
-              <SettingsRoundedIcon />
-              Settings
-            </ListItemButton>
-          </ListItem>
+          
         </List>
 
 
