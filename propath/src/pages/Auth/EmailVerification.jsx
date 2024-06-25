@@ -27,7 +27,7 @@ function EmailVerification() {
               </button>
             </div>
             <div className="mt-8 flex flex-wrap justify-center items-center">
-              <p className="font-medium text-base">Didn't receive any code?</p>
+              <p className="font-medium text-base text-black">Didn't receive any code?</p>
               <button
                 className="font-medium text-base text-[#9a80d4] hover:text-[#6756a8] h-12 px-4 rounded-xl bg-transparent"
               >

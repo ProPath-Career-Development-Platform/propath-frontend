@@ -117,7 +117,7 @@ export default function Sidebar() {
 
 
         
-        {user === "jobprovider" && ( <JpMenuItems />) }  {/* for jobprovidewr :created */}
+        {/* {user === "jobprovider" && ( <JpMenuItems />) }  for jobprovidewr :created */}
 
         {user === "jobseeker" && ( <JsMenuItems />) }  {/* for jobseeker :not created */}
 

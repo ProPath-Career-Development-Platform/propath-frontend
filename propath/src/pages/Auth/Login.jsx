@@ -81,7 +81,7 @@ function Login() {
               <div>
                 <input type="checkbox" id="remember" />
                 <label
-                  className="ml-2 font-medium text-base"
+                  className="ml-2 font-medium text-base text-black"
                   htmlFor="remember"
                 >
                   Remember me
@@ -129,7 +129,7 @@ function Login() {
               </button>
             </div>
             <div className="mt-8 flex justify-center items-center">
-              <p className="font-medium text-base">Don't have an account?</p>
+              <p className="font-medium text-base text-black">Don't have an account?</p>
               <button
                 onClick={handlesignup}
                 className="ml-2 font-medium text-base text-[#9a80d4] hover:text-[#6756a8] h-12 px-4 rounded-xl  bg-transparent"
