@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState} from 'react' 
 import { useLocation } from 'react-router-dom'
 
 import Box from '@mui/joy/Box';
@@ -18,11 +18,12 @@ import Avatar from '@mui/joy/Avatar';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import GroupRoundedIcon from '@mui/icons-material/GroupRounded';
-import SupportRoundedIcon from '@mui/icons-material/SupportRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import QuestionAnswerRoundedIcon from '@mui/icons-material/QuestionAnswerRounded';
+import Chip from '@mui/joy/Chip';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import WorkIcon from '@mui/icons-material/Work';
@@ -30,8 +31,10 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import GroupsIcon from '@mui/icons-material/Groups';
 
 import Typography from '@mui/joy/Typography';
+import { useEffect } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 
-console.log('Current pathname:', location.pathname);
+
 
 function Toggler({
     defaultExpanded = false,
@@ -57,8 +60,42 @@ function Toggler({
       </>
     );
   }
-
+ 
 function sidebarMenuItems() {
+  const location = useLocation();
+  const [stackState, setStackState] = useState(false);
+
+  useEffect(() => {
+    const savedState = sessionStorage.getItem('planCardState');
+    if (savedState === null) {
+      setStackState(true);
+    } else {
+      const parsedState = JSON.parse(savedState);
+      if (parsedState === false) {
+        setStackState(false);
+      } else if (parsedState === true) {
+        setStackState(true);
+      }
+    }
+  }, []);
+  
+
+   // Save state to session storage when it changes
+   useEffect(() => {
+    sessionStorage.setItem('planCardState', JSON.stringify(stackState));
+  }, [stackState]);
+
+  function handleStack() {
+    console.log('Stack clicked');
+    if (stackState){
+      setStackState(false);
+    }else{
+      setStackState(true);
+    }
+    
+  }
+
+  
   return (
     <>
 
@@ -76,90 +113,91 @@ function sidebarMenuItems() {
       >
 
       {/* ================ List here ========== */}
-        <List
-          size="sm"
-          sx={{
-            gap: 1,
-            '--List-nestedInsetStart': '30px',
-            '--ListItem-radius': (theme) => theme.vars.radius.sm,
-          }}
-        >
-          <ListItem>
-            <ListItemButton
-            component="a" 
-            href="/jobprovider/home/"
-            selected={location.pathname === "/jobprovider/home/"}>
-              <HomeRoundedIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Home</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+      <List
+        size="sm"
+        sx={{
+          gap: 1,
+          '--List-nestedInsetStart': '30px',
+          '--ListItem-radius': (theme) => theme.vars.radius.sm,
+        }}
+      >
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/home/"
+            selected={location.pathname === "/jobprovider/home/"}
+          >
+            <HomeRoundedIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Home</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton 
-              component="a" 
-              href="/jobprovider/dashboard/"
-              selected={location.pathname === "/jobprovider/dashboard/"}
-             >
-              <DashboardRoundedIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Dashboard</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/dashboard/"
+            selected={location.pathname === "/jobprovider/dashboard/"}
+          >
+            <DashboardRoundedIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Dashboard</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton
-            component="a" 
-            href="/jobprovider/post-a-job/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/post-a-job/"
             selected={location.pathname === "/jobprovider/post-a-job/"}
-             >
-              <AddCircleOutlineIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Post a Job</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <AddCircleOutlineIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Post a Job</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton
-            component="a"
-            href="/jobprovider/my-jobs/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/my-jobs/"
             selected={location.pathname === "/jobprovider/my-jobs/"}
-             >
-              <WorkIcon />
-              <ListItemContent>
-                <Typography level="title-sm">My Jobs</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <WorkIcon />
+            <ListItemContent>
+              <Typography level="title-sm">My Jobs</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton 
-            component="a"
-            href="/jobprovider/plans-and-billing/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/plans-and-billing/"
             selected={location.pathname === "/jobprovider/plans-and-billing/"}
-            >
-              <PaymentIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Plans and Billing</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <PaymentIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Plans and Billing</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
 
-          <ListItem>
-            <ListItemButton
-            component="a"
-            href="/jobprovider/meet-up/"
+        <ListItem>
+          <ListItemButton
+            component={RouterLink}
+            to="/jobprovider/meet-up/"
             selected={location.pathname === "/jobprovider/meet-up/"}
-            >
-              <GroupsIcon />
-              <ListItemContent>
-                <Typography level="title-sm">Meet Up</Typography>
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
+          >
+            <GroupsIcon />
+            <ListItemContent>
+              <Typography level="title-sm">Meet Up</Typography>
+            </ListItemContent>
+          </ListItemButton>
+        </ListItem>
           
 
         {/*   <ListItem nested>
@@ -194,16 +232,16 @@ function sidebarMenuItems() {
           </ListItem>
         */}
 
-        {/* 
+        
           <ListItem>
             <ListItemButton
               role="menuitem"
-              component="a"
+              component={RouterLink}
               href="/joy-ui/getting-started/templates/messages/"
             >
               <QuestionAnswerRoundedIcon />
               <ListItemContent>
-                <Typography level="title-sm">Messages</Typography>
+                <Typography level="title-sm">Notifications</Typography>
               </ListItemContent>
               <Chip size="sm" color="primary" variant="solid">
                 4
@@ -211,7 +249,7 @@ function sidebarMenuItems() {
             </ListItemButton>
           </ListItem>
 
-          */}
+          
 
           <ListItem nested>
             <Toggler
@@ -246,6 +284,21 @@ function sidebarMenuItems() {
               </List>
             </Toggler>
           </ListItem>
+
+          <ListItem>
+            <ListItemButton
+
+            component={RouterLink}
+            to="/jobprovider/settings/"
+            selected={location.pathname === "/jobprovider/settings/"}
+            
+            >
+              <SettingsRoundedIcon />
+              <Typography level="title-sm">Settings</Typography>
+            </ListItemButton>
+          </ListItem>
+
+
         </List>
 
         <List
@@ -258,40 +311,51 @@ function sidebarMenuItems() {
             mb: 2,
           }}
         >
-          <ListItem>
+       
+       {/*   <ListItem>
             <ListItemButton>
               <SupportRoundedIcon />
               Support
             </ListItemButton>
           </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <SettingsRoundedIcon />
-              Settings
-            </ListItemButton>
-          </ListItem>
+
+        */}
+          
         </List>
+
+
+        {/* card logic here */}
+        { stackState && 
+        
+        <>
+
         <Card
           invertedColors
           variant="soft"
           color="warning"
           size="sm"
           sx={{ boxShadow: 'none' }}
+          
         >
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Typography level="title-sm">Used space</Typography>
-            <IconButton size="sm">
+          <Stack direction="row" justifyContent="space-between" alignItems="center" >
+            <Typography level="title-sm">Using Free Plan</Typography>
+            <IconButton size="sm" onClick={handleStack}>
               <CloseRoundedIcon />
             </IconButton>
           </Stack>
           <Typography level="body-xs">
-            Your team has used 80% of your available space. Need more?
+            Need more job posts?<br></br>Upgrade now for additional job postings!
           </Typography>
-          <LinearProgress variant="outlined" value={80}          />
+          
+          
           <Button size="sm" variant="solid">
             Upgrade plan
           </Button>
         </Card>
+
+        </>}
+
+
       </Box>
       <Divider />
       <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>

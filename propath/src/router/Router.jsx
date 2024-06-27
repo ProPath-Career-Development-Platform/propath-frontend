@@ -14,12 +14,17 @@ import JpPostAJob from "../pages/jobprovider/dashboard/PostaJob";
 import JpMyJobs from "../pages/jobprovider/dashboard/MyJob";
 import JpPlansAndBilling from "../pages/jobprovider/dashboard/PlanAndBilling";
 import JpMeetUp from "../pages/jobprovider/dashboard/MeetUp";
+import JpSettings from "../pages/jobprovider/dashboard/Settings"
+
+//jobseeker
 import JobSeekerHome from "../pages/jobseeker/JobSeekerHome";
 import Login from "../pages/Auth/Login";
 import ForgotPassword from "../pages/Auth/ForgetPassword"; 
 import Signup from "../pages/Auth/Signup";
 import PasswordReset from "../pages/Auth/PasswordReset";
 import EmailVerification from "../pages/Auth/EmailVerification";
+
+
 
 const router = createBrowserRouter([
     {
@@ -64,7 +69,7 @@ const router = createBrowserRouter([
     },
     {
       path: "/jobprovider",
-      element: <DashboardLayout/>,
+      element: <DashboardLayout user="jobprovider"/>,
       children: [
         {
           path:"/jobprovider",
@@ -94,7 +99,12 @@ const router = createBrowserRouter([
         {
           path:"meet-up",
           element:<JpMeetUp/>
+        },
+        {
+          path:"settings",
+          element:<JpSettings/>
         }
+
       ]
     },
 
@@ -102,8 +112,23 @@ const router = createBrowserRouter([
 
       {
         path: "/jobseeker",
-        element: <JobSeekerHome/>,
+        element: <DashboardLayout user="jobseeker"/>,
         children: [
+
+          {
+            path:"/jobseeker",
+            element: <Navigate to="/jobseeker/home/" replace />
+          },
+
+          {
+            path:"home",
+            element:<JobSeekerHome/>
+          },
+
+          // {
+          //   path:"applied-jobs",
+          //   element:<JsAppliedJobs/>
+          // },
           
         ]
       }
