@@ -2,6 +2,7 @@
     background-color: #f1f0f0;
     color: #6a6969;
     font-weight: 500;
+    font-size: 14px;
 }
 
 .topnav ul{
@@ -29,8 +30,25 @@
     background-color: #fff;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 10px) {
     .topnav {
       display: none;
     }
-  }
+}
+
+.navbar-end .btn:hover{
+    background-color: white;
+    color: #3f067a;
+    border-color: #3f067a;
+}
+
+.navlink:hover, .navlink:focus{
+    background-color: white !important;
+    color: #3f067a !important;
+}
+
+.navlink.nav-active{
+    background-color: white;
+    color: #3f067a;
+    font-weight: 700;
+}
