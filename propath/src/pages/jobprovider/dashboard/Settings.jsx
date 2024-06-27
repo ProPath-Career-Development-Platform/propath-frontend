@@ -21,6 +21,7 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 import SettingsCompanyInfo from '../../../components/jobprovider/dashboard/SettingsCompanyInfo';
+import SettingsFoundingInfo from '../../../components/jobprovider/dashboard/SettingsFoundingInfo';
 
 
 const Settings = () => {
@@ -142,6 +143,15 @@ const Settings = () => {
           <TabPanel value={0}>
 
           <SettingsCompanyInfo/>
+
+
+
+          </TabPanel>
+
+          <TabPanel value={1}>
+
+          
+          <SettingsFoundingInfo/>
 
 
 
