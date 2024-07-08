@@ -15,6 +15,7 @@ import TabList from '@mui/joy/TabList';
 import Tab from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
 import { tabClasses } from '@mui/joy/Tab';
+import Divider from '@mui/joy/Divider';
 import BusinessOutlinedIcon from '@mui/icons-material/BusinessRounded';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
@@ -22,6 +23,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 
 import SettingsCompanyInfo from '../../../components/jobprovider/dashboard/SettingsCompanyInfo';
 import SettingsFoundingInfo from '../../../components/jobprovider/dashboard/SettingsFoundingInfo';
+import SettingsAccount from '../../../components/jobprovider/dashboard/SettingsAccount';
 
 
 const Settings = () => {
@@ -94,6 +96,7 @@ const Settings = () => {
               
             </Box>
 
+
             <Tabs
           defaultValue={0}
          
@@ -152,6 +155,15 @@ const Settings = () => {
 
           
           <SettingsFoundingInfo/>
+
+
+
+          </TabPanel>
+
+          <TabPanel value={3}>
+
+          
+          <SettingsAccount/>
 
 
 

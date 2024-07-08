@@ -15,6 +15,7 @@ import Card from '@mui/joy/Card';
 import CardActions from '@mui/joy/CardActions';
 import CardOverflow from '@mui/joy/CardOverflow';
 import CardContent from '@mui/joy/CardContent'
+import Snackbar from '@mui/joy/Snackbar';
 
 import EditRoundedIcon from '@mui/icons-material/EditRounded';
 import InfoOutlined from '@mui/icons-material/InfoOutlined';
@@ -22,6 +23,9 @@ import Tooltip from '@mui/joy/Tooltip';
 import { styled } from '@mui/joy';
 import CircularProgress from '@mui/joy/CircularProgress';
 import Badge from '@mui/joy/Badge';
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import Typography from '@mui/joy/Typography';
+
 
 
 function SettingsCompanyInfo() {
@@ -58,6 +62,9 @@ function SettingsCompanyInfo() {
     bannerImg: false,
     logoImg: false,
   }); // State for loading status
+
+  const [imgSnackOpen, setImgSnackOpen] = useState(false);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -139,6 +146,8 @@ function SettingsCompanyInfo() {
         [inputTagName]: reader.result,
       }));
 
+      setImgSnackOpen(true);
+
       setLoading(
         (prev) => ({
           ...prev,
@@ -188,7 +197,7 @@ function SettingsCompanyInfo() {
                         !formData.bannerImg ? (
                           <img
                             src={initialValues.bannerImg}
-                            srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+                            
                             loading="lazy"
                             alt="Initial Banner"
                             
@@ -196,7 +205,7 @@ function SettingsCompanyInfo() {
                         ) : (
                           <img
                             src={formData.bannerImg}
-                            srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+                            
                             loading="lazy"
                             alt="New Banner"
                             
@@ -280,7 +289,7 @@ function SettingsCompanyInfo() {
                       !formData.logoImg ? (
                         <img
                           src={initialValues.logoImg}
-                          srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+                          
                           loading="lazy"
                           alt="Initial Banner"
                           
@@ -288,7 +297,7 @@ function SettingsCompanyInfo() {
                       ) : (
                         <img
                           src={formData.logoImg}
-                          srcSet="https://images.unsplash.com/photo-1532614338840-ab30cf10ed36?auto=format&fit=crop&w=318&dpr=2 2x"
+                          
                           loading="lazy"
                           alt="New Banner"
                           
@@ -339,13 +348,19 @@ function SettingsCompanyInfo() {
          
             <Box sx={{
 
-              display:'grid',
+              display: { xs: 'block', sm: 'grid',},
               gap:2,
+
              
             }}>
 
 
-              <FormControl error={Boolean(error.companyName)}>
+              <FormControl 
+                
+                sx={{
+                      mb:{xs: 2, sm: 0}
+                    }}
+                error={Boolean(error.companyName)}>
                 <FormLabel>Company Name</FormLabel>
                 <Input name="companyName" placeholder="Company Name" value={formData.companyName} onChange={handleChange} />
                 {error.companyName && (
@@ -397,6 +412,35 @@ function SettingsCompanyInfo() {
 
       </form>
      </Stack>
+
+
+     <React.Fragment>
+
+                  <Snackbar
+                    variant="soft"
+                    color="warning"
+                    open={imgSnackOpen}
+                    onClose={() => setImgSnackOpen(false)}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    startDecorator={<WarningAmberIcon />}
+                    endDecorator={
+                      <Button
+                        onClick={() => setImgSnackOpen(false)}
+                        size="sm"
+                        variant="soft"
+                        color="warning"
+                      >
+                        Dismiss
+                      </Button>
+                    }
+                  > 
+                    <Box sx={{display: 'flex' , flexDirection:'column'}}>
+
+                    <Typography level='title-md' textAlign={'left'}>Remember to Save</Typography>
+                    <Typography level='body-sm'>Click the Save button to finalize your banner or logo modifications.</Typography>
+                    </Box>
+                  </Snackbar>
+                </React.Fragment>
     
     </>
   )
